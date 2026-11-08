@@ -1,0 +1,32 @@
+-- Q1. Employees whose salary is NOT between 10000 and 15000.
+SELECT first_name, last_name, salary
+FROM employees
+WHERE salary NOT BETWEEN 10000 AND 15000;
+
+
+-- Q2. Employees in department 30 or 100, in ascending order.
+SELECT first_name, last_name, department_id
+FROM employees
+WHERE department_id IN (30, 100)
+ORDER BY department_id ASC;
+
+
+-- Q3. Employees whose salary is NOT between 10000 and 15000
+-- and who work in department 30 or 100.
+SELECT first_name, last_name, salary
+FROM employees
+WHERE salary NOT BETWEEN 10000 AND 15000
+AND department_id IN (30, 100);
+
+
+-- Q4. Employees hired in 1987.
+SELECT first_name, last_name, hire_date
+FROM employees
+WHERE YEAR(hire_date) = 1987;
+
+
+-- Q5. Employees whose first name contains both 'b' and 'c'.
+SELECT first_name
+FROM employees
+WHERE first_name LIKE '%b%'
+AND first_name LIKE '%c%';
