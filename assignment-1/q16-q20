@@ -1,0 +1,128 @@
+
+-- Q16. Write a SQL statement to create a table employees
+-- including employee_id, first_name, last_name, email,
+-- phone_number, hire_date, job_id, salary, commission,
+-- manager_id and department_id.
+--
+-- Ensure employee_id does not contain duplicate values.
+-- department_id must reference an existing department_id
+-- in the departments table.
+-- job_id must reference an existing job_id in the jobs table.
+-- Use the InnoDB storage engine.
+
+CREATE TABLE employees (
+    employee_id INT UNIQUE,
+    first_name VARCHAR(20),
+    last_name VARCHAR(25),
+    email VARCHAR(50),
+    phone_number VARCHAR(20),
+    hire_date DATE,
+    job_id VARCHAR(10),
+    salary DECIMAL(8,2),
+    commission DECIMAL(4,2),
+    manager_id DECIMAL(6,0),
+    department_id DECIMAL(4,0),
+
+    FOREIGN KEY (department_id)
+        REFERENCES departments(department_id),
+
+    FOREIGN KEY (job_id)
+        REFERENCES jobs(job_id)
+
+) ENGINE = InnoDB;
+
+
+-- Q17. Write a SQL statement to create a table employees
+-- including employee_id, first_name, last_name, job_id and salary.
+--
+-- Ensure employee_id does not contain duplicate values.
+-- job_id must reference an existing job_id in the jobs table.
+-- Use the InnoDB storage engine.
+-- ON UPDATE CASCADE allows updates to job_id to be reflected
+-- automatically in the employees table.
+-- ON DELETE RESTRICT prevents deletion of a referenced job.
+
+CREATE TABLE employees (
+    employee_id INT UNIQUE,
+    first_name VARCHAR(20),
+    last_name VARCHAR(25),
+    job_id INT,
+    salary DECIMAL(8,2),
+
+    FOREIGN KEY (job_id)
+        REFERENCES jobs(job_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+
+) ENGINE = InnoDB;
+
+
+-- Q18. Create an employees table with employee_id, first_name,
+-- last_name, job_id and salary.
+-- employee_id must not contain duplicate values.
+-- job_id must reference an existing job_id in the jobs table.
+-- Use the InnoDB storage engine.
+-- ON DELETE CASCADE deletes matching employee records when
+-- the referenced job is deleted.
+-- ON UPDATE RESTRICT prevents updating a referenced job_id.
+
+CREATE TABLE employees (
+    employee_id INT UNIQUE,
+    first_name VARCHAR(20),
+    last_name VARCHAR(25),
+    job_id INT,
+    salary DECIMAL(8,2),
+
+    FOREIGN KEY (job_id)
+        REFERENCES jobs(job_id)
+        ON DELETE CASCADE
+        ON UPDATE RESTRICT
+
+) ENGINE = InnoDB;
+
+
+-- Q19. Create an employees table with employee_id, first_name,
+-- last_name, job_id and salary.
+-- employee_id must not contain duplicate values.
+-- job_id must reference an existing job_id in the jobs table.
+-- Use the InnoDB storage engine.
+-- ON DELETE SET NULL sets job_id to NULL in employees when
+-- the referenced job is deleted.
+-- ON UPDATE SET NULL sets job_id to NULL in employees when
+-- the referenced job_id is updated.
+
+CREATE TABLE employees (
+    employee_id INT UNIQUE,
+    first_name VARCHAR(20),
+    last_name VARCHAR(25),
+    job_id INT NULL,
+    salary DECIMAL(8,2),
+
+    FOREIGN KEY (job_id)
+        REFERENCES jobs(job_id)
+        ON DELETE SET NULL
+        ON UPDATE SET NULL
+
+) ENGINE = InnoDB;
+
+-- Q20. Write a SQL statement to create an employees table
+-- including employee_id, first_name, last_name, job_id and salary.
+-- employee_id must not contain duplicate values.
+-- job_id must reference an existing job_id in the jobs table.
+-- Use the InnoDB storage engine.
+-- ON DELETE NO ACTION rejects deletion of a referenced job.
+-- ON UPDATE NO ACTION rejects updates to a referenced job_id.
+
+CREATE TABLE employees (
+    employee_id INT UNIQUE,
+    first_name VARCHAR(20),
+    last_name VARCHAR(25),
+    job_id INT,
+    salary DECIMAL(8,2),
+
+    FOREIGN KEY (job_id)
+        REFERENCES jobs(job_id)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
+
+) ENGINE = InnoDB;

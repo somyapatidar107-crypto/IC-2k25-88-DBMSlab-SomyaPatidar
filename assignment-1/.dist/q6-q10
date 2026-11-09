@@ -1,0 +1,65 @@
+-- Q11. Write a SQL statement to create a table named countries
+-- including columns country_id, country_name and region_id.
+-- Make country_id a primary key so it cannot contain duplicate data.
+
+CREATE TABLE countries (
+    country_id INT PRIMARY KEY,
+    country_name VARCHAR(50),
+    region_id INT
+);
+
+
+-- Q12. Write a SQL statement to create a table named countries
+-- including columns country_id, country_name and region_id.
+-- Make country_id unique and automatically incremented.
+
+CREATE TABLE countries (
+    country_id INT AUTO_INCREMENT UNIQUE,
+    country_name VARCHAR(50),
+    region_id INT
+);
+
+
+-- Q13. Write a SQL statement to create a table named countries
+-- including columns country_id, country_name and region_id.
+-- Make the combination of country_id and region_id unique.
+
+CREATE TABLE countries (
+    country_id INT,
+    country_name VARCHAR(50),
+    region_id INT,
+    UNIQUE (country_id, region_id)
+);
+-- Q14. Create job_history table.
+-- employee_id must not contain duplicate values.
+-- job_id must reference an existing job_id in the jobs table.
+
+CREATE TABLE job_history (
+    employee_id INT UNIQUE,
+    start_date DATE,
+    end_date DATE,
+    job_id VARCHAR(10),
+    department_id INT,
+    FOREIGN KEY (job_id) REFERENCES jobs(JOB_ID)
+);
+-- Q15. Create employees table.
+-- employee_id must not contain duplicate values.
+-- The combination of department_id and manager_id
+-- must exist in the departments table.
+
+CREATE TABLE employees (
+    employee_id INT UNIQUE,
+    first_name VARCHAR(20),
+    last_name VARCHAR(25),
+    email VARCHAR(50),
+    phone_number VARCHAR(20),
+    hire_date DATE,
+    job_id VARCHAR(10),
+    salary DECIMAL(8,2),
+    commission DECIMAL(4,2),
+    manager_id DECIMAL(6,0),
+    department_id DECIMAL(4,0),
+
+    FOREIGN KEY (department_id, manager_id)
+    REFERENCES departments (DEPARTMENT_ID, MANAGER_ID)
+);
